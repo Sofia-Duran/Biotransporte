@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>BIOTRANSPORTE</title>
+</head>
+<body>
+  <div id="navbar" class="anim-down"></div>
+
+  <script>
+      // Insertar el contenido de navbar.html en el elemento con id "navbar"
+      fetch('/navbar.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('navbar').innerHTML = data;
+          })
+          .catch(error => console.error('Error cargando el navbar:', error));
+      fetch('/tipo-usuario')
+          .then(response => response.json())
+          .then(data => {
+              const menu = document.getElementById('menu');
+              const tipoUsuario = data.tipo_usuario;
+
+              // Agregar opciones de menú según el tipo de usuario
+              if (tipoUsuario === 'logistico') {
+                  menu.innerHTML += '<li><a href="/ver-usuarios">Ver Usuarios</a></li>';
+                  menu.innerHTML += '<li><a href="hospitales.html">Hospitales</a></li>';
+                  menu.innerHTML += '<li><a href="transportistas.html">Transportistas</a></li>';
+                  menu.innerHTML += '<li><a href="/transaccion-eliminar">Eliminar Registros</a></li>';
+                  menu.innerHTML += '<li><a href="editar.html">Editar Registros</a></li>';
+                  menu.innerHTML += '<li><a href="editar-tabla.html">Editar Tablas</a></li>';
+
+              } else if (tipoUsuario === 'hospital') {
+                menu.innerHTML += '<li><a href="/ver-equipos">Ver Equipos </a></li>';
+                menu.innerHTML += '<li><a href="equipo.html">Insertar Equipo</a></li>';
+                menu.innerHTML += '<li><a href="/transaccion-eliminar">Eliminar Registros</a></li>';
+                menu.innerHTML += '<li><a href="editar.html">Editar Registros</a></li>';
+
+              } else if (tipoUsuario === 'transportista') {
+                menu.innerHTML += '<li><a href="envio.html">Insertar Envio</a></li>';
+                menu.innerHTML += '<li><a href="/ver-envios">Ver Envios</a></li>';
+                menu.innerHTML += '<li><a href="/ver-equipos-vista">Ver Equipos Filtrados</a></li>';
+                menu.innerHTML += '<li><a href="buscar-hospital.html">Buscar Hospital</a></li>';
+                menu.innerHTML += '<li><a href="/transaccion-eliminar">Eliminar Registros</a></li>';
+                menu.innerHTML += '<li><a href="editar.html">Editar Registros</a></li>';
+              }
+
+              // Opción de cerrar sesión para todos los tipos de usuario
+              menu.innerHTML += '<li><a href="/logout">Cerrar Sesión</a></li>';
+          })
+          .catch(error => console.error('Error obteniendo el tipo de usuario:', error));
+  </script>
+  <div id="container" style="text-align: center;">
+  <h1 class="anim-up">Bienvenido al sistema de transporte biomédico </h1>
+  <h2 class="anim-right">¡Gracias por elegirnos como su socio de confianza!</h2>
+  <p class="anim-left"> 
+    En <b>Biotransporte</b>, nos especializamos en el transporte, <b>eficiente</b> y <b>puntual</b> de equipos biomédicos, 
+    entendiendo que cada carga que trasladamos representa no solo un equipo, 
+    sino una <b>contribución esencial</b> para la salud y el <b>bienestar</b> de las personas.</p>
+  <img src="img/portada.jpg" alt="Equipo biomédico" width="500" class="anim-fade-in anim-pause-2">
+  </div>
+  <div id="bajo" style="text-align: center;">
+    <p><strong>Biotransporte © 2024</strong></p>
+  </div>
+</body>
+</html>

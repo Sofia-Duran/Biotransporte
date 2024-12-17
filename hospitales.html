@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospitales</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="navbar"></div>
+  <h1 class="anim-up">Búsqueda en Tiempo Real de Hospitales</h1>
+  <input type="text" id="search" placeholder="Buscar hospital..." />
+  <ul id="results"></ul>
+  <script>
+    document.getElementById('search').addEventListener('keyup', function() {
+      const query = this.value;
+      fetch(`/buscar-hospitales?query=${query}`)
+        .then(res => res.json())
+        .then(data => {
+          const results = document.getElementById('results');
+          results.innerHTML = '';
+          data.forEach(hospital => {
+            const li = document.createElement('li');
+            li.textContent = `(Nombre: ${hospital.nombre_hospital}) (Dirección: ${hospital.direccion}) (Teléfono: ${hospital.telefono})`;
+            results.appendChild(li);
+          });
+        });
+    });
+  </script>
+  <div class="cont">
+    <form action="/insertar-hospital" method="POST">
+      <h1 class="anim-up">Agregar Hospital</h1>
+      <h2>Inserte los datos del Hospital</h2>
+      <label for="nombre">Nombre del hospital:</label>
+      <input type="text" id="nombre" name="nombre">
+      
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" name="direccion">
+    
+      <label for="correo">Correo:</label>
+      <input type="text" id="correo" name="correo">
+  
+      <label for="tel">Teléfono:</label>
+      <input type="text" id="tel" name="tel">
+
+      <button type="submit">Guardar</button>
+    </form>
+    <div>
+      <form action="/upload-hospital" method="POST" enctype="multipart/form-data">
+        <h1 class="anim-up">Cargar Hospitales desde Excel</h1>
+        <input type="file" name="excelFile" accept=".xlsx" />
+        <button type="submit">Subir Archivo</button>
+        <button onclick="window.location.href='/download-hospital'">Descargar Hospitales</button>
+      </form>
+    </div>
+  </div>
+  
+</body>
+<button onclick="window.location.href='/ver-hospitales'">Ver Hospitales Guardados</button>
+<button onclick="window.location.href='/'">Volver</button>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar registros</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    fetch('/tipo-usuario')
+    .then(response => response.json())
+    .then(data => {
+      const tipoUsuario = data.tipo_usuario;
+      // Función para mostrar la sección correspondiente al tipo de usuario
+      function mostrarSeccionPorUsuario(tipoUsuario) {
+        // Oculta todas las secciones
+        const secciones = document.querySelectorAll('.user-section');
+        secciones.forEach(seccion => {
+          seccion.style.display = 'none';
+        });
+
+        // Muestra la sección correspondiente al usuario
+        const seccionActual = document.getElementById(`${tipoUsuario}-section`);
+        if (seccionActual) {
+          seccionActual.style.display = 'block';
+        } else {
+          console.error(`No se encontró una sección para el tipo de usuario: ${tipoUsuario}`);
+        }
+      }
+      mostrarSeccionPorUsuario(tipoUsuario);
+    })  
+  </script>
+  <div id="logistico-section" class="user-section">
+    <h1>Editar Hospital</h1>
+    <h2>Inserte los datos del Hospital</h2>
+    <form action="/editar-hospital" method="POST">
+      <label for="nombre">Nombre del hospital:</label>
+      <input type="text" id="nombre" name="nombre">
+      
+      <label for="direccion">Dirección del Hospital:</label>
+      <input type="text" id="direccion" name="direccion">
+
+      <label for="correo">Correo del Hospital:</label>
+      <input type="text" id="correo" name="correo">
+
+      <label for="telefono">Teléfono del Hospital:</label>
+      <input type="text" id="telefono" name="telefono">
+
+      <label for="id">ID del Hospital:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Editar</button>
+    </form>
+    <button onclick="window.location.href='/ver-hospitales'">Ver Hospitales Guardados</button>
+
+    <h1>Editar Transportista</h1>
+    <h2>Inserte los datos del Transportista</h2>
+    <form action="/editar-transportista" method="POST">
+      <label for="nombre">Nombre del Transportista:</label>
+      <input type="text" id="nombre" name="nombre">
+      
+      <label for="telefono">Teléfono del Transportista:</label>
+      <input type="text" id="telefono" name="telefono">
+
+      <label for="fecha_contratacion">Fecha de Contratación del Transportista:</label>
+      <input type="date" id="fecha_contratacion" name="fecha_contratacion">
+
+      <label for="salario">Salario del Transportista:</label>
+      <input type="number" id="salario" name="salario">
+
+      <label for="id">ID del Transportista:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Editar</button>
+    </form>
+    <button onclick="window.location.href='/ver-transportistas'">Ver Transportistas Guardados</button>
+  </div>
+  <div id="transportista-section" class="user-section">
+    <h1>Editar Envío</h1>
+    <h2>Inserte los datos del Envío</h2>
+    <form action="/editar-envio" method="POST">
+      <label for="rastreo">Numero de rastreo del envío:</label>
+      <input type="text" id="rastreo" name="rastreo">
+      
+      <label for="hospital">Hospital al que va dirigido el Envío:</label>
+      <input type="text" id="hospital" name="hospital">
+
+      <label for="fecha_envio">Fecha del Envío:</label>
+      <input type="date" id="fecha_envio" name="fecha_envio">
+
+      <label for="fecha_entrega">Fecha de entrega del Envío:</label>
+      <input type="date" id="fecha_entrega" name="fecha_entrega">
+
+      <label for="id_chofer">ID del Chofer:</label>
+      <input type="number" id="id_chofer" name="id_chofer">
+
+      <label for="id">ID del Envío:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Editar</button>
+    </form>
+    <button onclick="window.location.href='/ver-envios'">Ver Envíos Guardados</button>
+  </div>
+  <div id="hospital-section" class="user-section">
+    <h1>Editar Equipo</h1>
+    <h2>Inserte los datos del Equipo</h2>
+    <form action="/editar-equipo" method="POST">
+      <label for="nombre">Nombre del Equipo:</label>
+      <input type="text" id="nombre" name="nombre">
+
+      <label for="marca">Marca del Equipo:</label>
+      <input type="text" id="marca" name="marca">
+
+      <label for="cantidad">Cantidad del Equipo:</label>
+      <input type="number" id="cantidad" name="cantidad">
+
+      <label for="no_envio">No. del envío del Equipo:</label>
+      <input type="text" id="no_envio" name="no_envio">
+      
+      <label for="id">ID del Equipo:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Editar</button>
+    </form>
+    <button onclick="window.location.href='/ver-equipos'">Ver Equipos Guardados</button>
+  </div>
+</body>
+<button onclick="window.location.href='/'">Volver</button>
+</html>

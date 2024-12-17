@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eliminar registros</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    fetch('/tipo-usuario')
+    .then(response => response.json())
+    .then(data => {
+      const tipoUsuario = data.tipo_usuario;
+      // Función para mostrar la sección correspondiente al tipo de usuario
+      function mostrarSeccionPorUsuario(tipoUsuario) {
+        // Oculta todas las secciones
+        const secciones = document.querySelectorAll('.user-section');
+        secciones.forEach(seccion => {
+          seccion.style.display = 'none';
+        });
+
+        // Muestra la sección correspondiente al usuario
+        const seccionActual = document.getElementById(`${tipoUsuario}-section`);
+        if (seccionActual) {
+          seccionActual.style.display = 'block';
+        } else {
+          console.error(`No se encontró una sección para el tipo de usuario: ${tipoUsuario}`);
+        }
+      }
+      mostrarSeccionPorUsuario(tipoUsuario);
+    })  
+  </script>
+
+  <div id="logistico-section" class="user-section">
+    <h1>Eliminar Hospital</h1>
+    <h2>Inserte los datos del Hospital</h2>
+    <form action="/eliminar-hospital" method="POST">
+      <label for="nombre">Nombre del hospital:</label>
+      <input type="text" id="nombre" name="nombre">
+    
+      <label for="id">ID del Hospital:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Eliminar</button>
+    </form>
+    <button onclick="window.location.href='/ver-hospitales'">Ver Hospitales Guardados</button>
+    <h1>Eliminar Transportista</h1>
+    <h2>Inserte los datos del Transportista</h2>
+    <form action="/eliminar-transportista" method="POST">
+      <label for="nombre">Nombre del Transportista:</label>
+      <input type="text" id="nombre" name="nombre">
+      
+      <label for="id">ID del Transportista:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Eliminar</button>
+    </form>
+    <button onclick="window.location.href='/ver-transportistas'">Ver Transportistas Guardados</button>
+  </div>
+  <div id="transportista-section" class="user-section">
+    <h1>Eliminar Envío</h1>
+    <h2>Inserte los datos del Envío</h2>
+    <form action="/eliminar-envio" method="POST">
+      <label for="rastreo">Numero de rastreo del envío:</label>
+      <input type="text" id="rastreo" name="rastreo">
+      
+      <label for="id">ID del Envío:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Eliminar</button>
+      <button onclick="window.location.href='/ver-envios'">Ver Envíos Guardados</button>
+    </form>
+  </div>
+  <div id="hospital-section" class="user-section">
+    <h1>Eliminar Equipo</h1>
+    <h2>Inserte los datos del Equipo</h2>
+    <form action="/eliminar-equipos" method="POST">
+      <label for="nombre">Nombre del Equipo:</label>
+      <input type="text" id="nombre" name="nombre">
+      
+      <label for="id">ID del Equipo:</label>
+      <input type="number" id="id" name="id">
+
+      <button type="submit">Eliminar</button>
+    </form>
+    <button onclick="window.location.href='/ver-equipos'">Ver Equipos Guardados</button>
+  </div>
+</body>
+<button onclick="window.location.href='/'">Volver</button>
+<button onclick="window.location.href='/rollback'">Deshacer cambios</button>
+<button onclick="window.location.href='/commit'">Guardar cambios</button>
+</html>

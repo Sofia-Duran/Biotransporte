@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda en Tiempo Real</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="navbar"></div>
+  <h1>Búsqueda en Tiempo Real de Hospitales</h1>
+  <input type="text" id="search" placeholder="Buscar hospital..." />
+  <ul id="results"></ul>
+  <script>
+    document.getElementById('search').addEventListener('keyup', function() {
+      const query = this.value;
+      fetch(`/buscar-hospitales?query=${query}`)
+        .then(res => res.json())
+        .then(data => {
+          const results = document.getElementById('results');
+          results.innerHTML = '';
+          data.forEach(hospital => {
+            const li = document.createElement('li');
+            li.textContent = `(Nombre: ${hospital.nombre_hospital}) (Dirección: ${hospital.direccion}) (Teléfono: ${hospital.telefono})`;
+            results.appendChild(li);
+          });
+        });
+    });
+  </script>
+  <button onclick="window.location.href='/'">Volver</button>
+</body>
+</html>

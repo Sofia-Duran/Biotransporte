@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar Envío</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Inserte los datos del Envío</h2>
+    <form action="/insertar-envio" method="POST">
+      <label for="rastreo">Número de rastreo:</label>
+      <input type="text" id="rastreo" name="rastreo">
+      
+      <label for="chofer">ID del Chofer:</label>
+      <input type="number" id="chofer" name="chofer">
+    
+      <label for="hospital">Hospital al que va dirigido:</label>
+      <input type="text" id="hospital" name="hospital">
+  
+      <label for="fecha_entrega">Fecha de entrega:</label>
+      <input type="datetime-local" id="fecha_entrega" name="fecha_entrega">
+
+      <button type="submit">Guardar</button>
+    </form>
+    <button onclick="window.location.href='/ver-envios'">Ver Envíos Guardados</button>
+  <button onclick="window.location.href='/'">Volver</button>
+  <h1>Cargar Envíos desde Excel</h1>
+  <form action="/upload-envio" method="POST" enctype="multipart/form-data">
+    <input type="file" name="excelFile" accept=".xlsx" />
+    <button type="submit">Subir Archivo</button>
+  </form>
+  <button onclick="window.location.href='/download-envio'">Descargar Envíos</button>
+</body>
+</html>

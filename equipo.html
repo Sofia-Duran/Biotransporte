@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar Equipo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Inserte los datos del Equipo</h2>
+    <form action="/insertar-equipos" method="POST">
+      <label for="nombre">Nombre del Equipo:</label>
+      <input type="text" id="nombre" name="nombre">
+      
+      <label for="marca">Marca del Equipo:</label>
+      <input type="text" id="marca" name="marca">
+    
+      <label for="cantidad">Cantidad de piezas:</label>
+      <input type="text" id="cantidad" name="cantidad">
+  
+      <label for="no_envio">Número de envío:</label>
+      <input type="number" id="no_envio" name="no_envio">
+
+      <button type="submit">Guardar</button>
+    </form>
+    <button onclick="window.location.href='/ver-equipos'">Ver Equipos Guardados</button>
+  <button onclick="window.location.href='/'">Volver</button>
+  <h1>Cargar Equipos desde Excel</h1>
+  <form action="/upload-equipo" method="POST" enctype="multipart/form-data">
+    <input type="file" name="excelFile" accept=".xlsx" />
+    <button type="submit">Subir Archivo</button>
+  </form>
+  <button onclick="window.location.href='/download-equipo'">Descargar Equipos</button>
+</body>
+</html>

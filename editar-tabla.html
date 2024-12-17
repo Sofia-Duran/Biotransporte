@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar tablas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Editar Tabla</h1>
+    <h2>Inserte los aspectos correspondientes de la Tabla</h2>
+    <form action="/editar-tabla" method="POST">
+      <label for="nombre_tabla">Nombre de la Tabla a editar:</label>
+      <input type="text" id="nombre_tabla" name="nombre_tabla">
+      
+      <label for="nombre_columna">Nombre del nuevo campo a agregar:</label>
+      <input type="text" id="nombre_columna" name="nombre_columna">
+
+      <label for="tipo_dato">Tipo de dato del campo:</label>
+      <input type="text" id="tipo_dato" name="tipo_dato">
+
+      <button type="submit">Editar</button>
+    </form>
+
+    <h1>Eliminar Campo de la Tabla</h1>
+    <h2>Inserte los aspectos correspondientes a la Columna</h2>
+    <form action="/eliminar-columna" method="POST">
+      <label for="nombre_tabla">Nombre de la Tabla:</label>
+      <input type="text" id="nombre_tabla" name="nombre_tabla">
+      
+      <label for="nombre_columna">Nombre de la Columna a eliminar:</label>
+      <input type="text" id="nombre_columna" name="nombre_columna">
+
+      <button type="submit">Eliminar</button>
+    </form> 
+</body>
+<button onclick="window.location.href='/'">Volver</button>
+</html>
